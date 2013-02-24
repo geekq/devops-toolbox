@@ -1,0 +1,35 @@
+Do you know the situation? You get a new server, start installing and
+configuring stuff, then install additional services every couple of
+month. And after some years decide to relocate to a new server or to
+split: move *some* services to a new server. And think: what a mess, how
+long will it take until it perfectly configured and runs again - should
+I better stay with the old one as long as possible? ;-)
+
+What about Zero day exploits? You think, you system could have been
+compromised and need to reinstall everything as soon as possible.
+
+
+Approaches I have already used:
+
+* **Document every configuration step in wiki.** Can be a big help, but does
+  not work automatically on the next installation - you still need to
+  interpret and manually run single steps. No automatic testing.
+* **Use [etckeeper]() with git to record the configuration changes.**
+  Gives you later a clue, what has been changed. But the diffs are not
+  automatically applicable on new installation, for example for a newer
+  version
+
+Now I decided to use [puppet]() for all newer installations.
+
+Assumptions/prerequisites
+
+* we will use a script for bootstraping, puppet 3.0 beyond that.
+  Puppet supports multiple (almost all) Linux distributions. For the
+  bootstrap scripts I'll start with Ubuntu/Debian and add Fedora/RedHat
+  later.
+* **Ruby 1.9** Bash programming can be cumbersome - so use Ruby and nice
+  DSLs like Rake, Capistrano with their easy readable syntax for all non trivial
+  tasks. 1.9 is now available in all recent Linux distributions - so use
+  that. In Ruby 1.9 the rubygems is included - makes easy to install
+  additional libraries (gems). Some libraries will be "vendored" though.
+  E.g. `trollop` for nice command line tools.
