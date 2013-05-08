@@ -1,0 +1,24 @@
+#!/usr/bin/env ruby
+require 'trollop'
+require 'rake'
+include FileUtils::Verbose
+
+opts = Trollop::options do
+  opt :target_host, "Target host to initialize and provision with puppet, either an IP or a resolvable name", :type => :string, :required => true
+  opt :user, "User for using in SSH connection", :type => :string
+  opt :identity_file, "An optional identity file for SSH connection", :type => :string
+  opt :skip_repo_update, "Skip apt-get update - useful for testing to shorten the run", :type => :boolean
+end
+
+ssh_cmd = "ssh "
+ssh_cmd << "#{opts[:user]}@" if opts[:user]
+ssh_cmd << opts[:target_host]
+ssh_cmd << " -i #{opts[:identity_file]}" if opts[:identity_file]
+
+sh %Q[#{ssh_cmd} "
+  sudo apt-get update
+  sudo apt-get install puppet
+  apt-cache show puppet
+  dpkg --get-selections | grep puppet
+  puppet --version
+"]

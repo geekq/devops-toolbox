@@ -1,9 +1,9 @@
 Do you know the situation? You get a new server, start installing and
 configuring stuff, then install additional services every couple of
 month. And after some years decide to relocate to a new server or to
-split: move *some* services to a new server. And think: what a mess, how
+split: move *some* services to a new server. And then you think: "What a mess, how
 long will it take until it perfectly configured and runs again - should
-I better stay with the old one as long as possible? ;-)
+I better stay with the old one as long as possible?" ;-)
 
 What about Zero day exploits? You think, you system could have been
 compromised and need to reinstall everything as soon as possible.
@@ -23,7 +23,7 @@ Now I decided to use [puppet]() for all newer installations.
 
 Assumptions/prerequisites
 
-* we will use a script for bootstraping, puppet 3.0 beyond that.
+* we will use a script for bootstraping, after that - puppet 3.0.
   Puppet supports multiple (almost all) Linux distributions. For the
   bootstrap scripts I'll start with Ubuntu/Debian and add Fedora/RedHat
   later.
@@ -33,3 +33,4 @@ Assumptions/prerequisites
   that. In Ruby 1.9 the rubygems is included - makes easy to install
   additional libraries (gems). Some libraries will be "vendored" though.
   E.g. `trollop` for nice command line tools.
+
