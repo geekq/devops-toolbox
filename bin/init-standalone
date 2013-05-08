@@ -16,9 +16,7 @@ ssh_cmd << opts[:target_host]
 ssh_cmd << " -i #{opts[:identity_file]}" if opts[:identity_file]
 
 sh %Q[#{ssh_cmd} "
-  sudo apt-get update
+  #{'sudo apt-get update' unless opts[:skip_repo_update]}
   sudo apt-get install puppet
-  apt-cache show puppet
-  dpkg --get-selections | grep puppet
   puppet --version
 "]
