@@ -31,11 +31,13 @@ sh %Q[#{ssh_cmd} "
   sudo chown -Rc #{opts[:user]} /etc/puppet/modules/
 "]
 
+parent_config_dir = File.absolute_path(File.join(File.dirname(opts[:main_puppet_file]), '..'))
+
 puts
 puts "UPLOAD PUPPET MANIFESTS AND MODULES"
 sh %Q[
   #{rsync_cmd} #{opts[:main_puppet_file]} #{rsync_remote}:/etc/puppet/manifests/
-  # #{rsync_cmd} puppet/modules #{rsync_remote}:/etc/puppet/
+  #{rsync_cmd} #{parent_config_dir}/modules #{rsync_remote}:/etc/puppet/
 ]
 
 sh %Q[#{ssh_cmd} "
