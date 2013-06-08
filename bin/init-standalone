@@ -25,7 +25,7 @@ rsync_remote << opts[:target_host]
 
 sh %Q[#{ssh_cmd} "
   #{'sudo apt-get update' unless opts[:skip_repo_update]}
-  sudo apt-get install puppet
+  sudo apt-get install --assume-yes puppet
   puppet --version
   sudo chown -Rc #{opts[:user]} /etc/puppet/manifests/
   sudo chown -Rc #{opts[:user]} /etc/puppet/modules/
